@@ -45,7 +45,10 @@ import {
   Sun,
   Moon,
   GraduationCap,
-  Lightbulb
+  Lightbulb,
+  Check,
+  AlertCircle,
+  Loader2
 } from "lucide-react";
 
 // --- Theme Context ---
@@ -157,7 +160,7 @@ const PROJECTS_DATA = [
     gradient: "from-purple-600 to-indigo-600",
     link: "#",
     status: "Development",
-    image: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?auto=format&fit=crop&q=80&w=1000"
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" // Data Analytics/Dashboard
   },
   {
     id: "02",
@@ -173,7 +176,7 @@ const PROJECTS_DATA = [
     gradient: "from-blue-600 to-cyan-600",
     link: "https://tattvacampus.ai",
     status: "Deployed",
-    image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&q=80&w=1000"
+    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=1000" // Education/Tech
   },
   {
     id: "03",
@@ -189,7 +192,7 @@ const PROJECTS_DATA = [
     gradient: "from-orange-600 to-red-600",
     link: "#",
     status: "Prototype",
-    image: "https://images.unsplash.com/photo-1555679427-1f6dfcce943b?auto=format&fit=crop&q=80&w=1000"
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" // Circuit/Hardware
   },
   {
     id: "04",
@@ -205,7 +208,7 @@ const PROJECTS_DATA = [
     gradient: "from-pink-600 to-rose-600",
     link: "#",
     status: "Deployed",
-    image: "https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?auto=format&fit=crop&q=80&w=1000"
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000" // Data/AI Network
   },
   {
     id: "05",
@@ -221,7 +224,7 @@ const PROJECTS_DATA = [
     gradient: "from-cyan-500 to-blue-500",
     link: "#",
     status: "Deployed",
-    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=1000"
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=1000" // React Code/Modern UI
   }
 ];
 
@@ -301,20 +304,20 @@ const Magnetic = ({ children, className = "" }) => {
 // 3. Buttons & Inputs
 const Button = ({ children, className = "", variant = "primary", ...props }) => {
   const variants = {
-    primary: "bg-violet-600 text-white hover:bg-violet-700 shadow-[0_0_30px_rgba(139,92,246,0.3)] border border-violet-500/50",
-    outline: "border border-[var(--border-color)] bg-transparent hover:bg-[var(--bg-card-hover)] text-[var(--text-main)] hover:border-violet-500",
+    primary: "bg-violet-600 text-white hover:bg-violet-700 shadow-[0_0_30px_rgba(139,92,246,0.3)] border border-violet-500/50 disabled:opacity-50 disabled:cursor-not-allowed",
+    outline: "border border-[var(--border-color)] bg-transparent hover:bg-[var(--bg-card-hover)] text-[var(--text-main)] hover:border-violet-500 disabled:opacity-50 disabled:cursor-not-allowed",
   };
   return (
     <button className={`inline-flex items-center justify-center rounded-lg text-sm font-medium transition-all h-11 px-8 relative overflow-hidden group ${variants[variant]} ${className}`} {...props}>
       <span className="relative z-10 flex items-center gap-2">{children}</span>
-      {variant === 'primary' && <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 skew-x-12" />}
+      {variant === 'primary' && !props.disabled && <div className="absolute inset-0 -translate-x-full group-hover:translate-x-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 skew-x-12" />}
     </button>
   );
 };
 
 const Input = ({ className = "", ...props }) => (
   <div className="relative group w-full">
-    <input className={`flex h-11 w-full rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:ring-1 focus:ring-violet-500 transition-all ${className}`} {...props} />
+    <input className={`flex h-11 w-full rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] px-4 py-2 text-sm text-[var(--text-main)] focus:outline-none focus:ring-1 focus:ring-violet-500 transition-all focus:bg-[var(--bg-card-hover)] ${className}`} {...props} />
     <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-violet-500 transition-all duration-500 group-hover:w-full"></div>
   </div>
 );
@@ -1153,6 +1156,29 @@ const Projects = ({ onProjectClick }) => {
 
 // 10. Contact Section
 const Contact = () => {
+  const [formData, setFormData] = useState({ identity: "", signal: "", payload: "" });
+  const [status, setStatus] = useState("idle"); // idle, submitting, success, error
+  const [message, setMessage] = useState("");
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    // Simulate network delay
+    setTimeout(() => {
+        setStatus("success");
+        setFormData({ identity: "", signal: "", payload: "" });
+        
+        // Reset to idle after 5 seconds
+        setTimeout(() => setStatus("idle"), 5000);
+    }, 1500);
+  };
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden bg-[var(--bg-secondary)] border-t border-[var(--border-color)]">
       <RevealOnScroll className="container px-4 mx-auto max-w-xl text-center relative z-10">
@@ -1163,27 +1189,78 @@ const Contact = () => {
           <GlitchText text="Initialize Handshake" className="text-[var(--text-main)]" />
         </h2>
         <p className="text-[var(--text-muted)] mb-10 text-base md:text-lg leading-relaxed">
-          Open to discussing high-impact engineering roles and complex system challenges.
+          Open to meaningful conversations around backend systems, AI, and impactful projects.
         </p>
         
-        <form className="space-y-4 text-left p-6 md:p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] backdrop-blur-md shadow-2xl">
+        <form onSubmit={handleSubmit} className="space-y-4 text-left p-6 md:p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-color)] backdrop-blur-md shadow-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs uppercase font-bold text-[var(--text-muted)] tracking-wider">Identity</label>
-              <Input placeholder="John Doe" />
+              <label htmlFor="identity" className="text-xs uppercase font-bold text-[var(--text-muted)] tracking-wider">Identity</label>
+              <Input 
+                id="identity" 
+                value={formData.identity}
+                onChange={handleChange}
+                placeholder="Your Name" 
+                required
+              />
             </div>
             <div className="space-y-1.5">
-              <label className="text-xs uppercase font-bold text-[var(--text-muted)] tracking-wider">Signal</label>
-              <Input type="email" placeholder="john@example.com" />
+              <label htmlFor="signal" className="text-xs uppercase font-bold text-[var(--text-muted)] tracking-wider">Signal</label>
+              <Input 
+                id="signal" 
+                type="email" 
+                value={formData.signal}
+                onChange={handleChange}
+                placeholder="you@email.com" 
+                required
+              />
             </div>
           </div>
           <div className="space-y-1.5">
-            <label className="text-xs uppercase font-bold text-[var(--text-muted)] tracking-wider">Payload</label>
-            <textarea className="flex min-h-[140px] w-full rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] px-4 py-3 text-sm text-[var(--text-main)] focus:outline-none focus:ring-1 focus:ring-violet-500 transition-all placeholder:[var(--text-muted)] resize-none" placeholder="Let's build something scalable..." />
+            <label htmlFor="payload" className="text-xs uppercase font-bold text-[var(--text-muted)] tracking-wider">Payload</label>
+            <textarea 
+              id="payload"
+              value={formData.payload}
+              onChange={handleChange}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }
+              }}
+              className="flex min-h-[140px] w-full rounded-md border border-[var(--border-color)] bg-[var(--bg-card)] px-4 py-3 text-sm text-[var(--text-main)] focus:outline-none focus:ring-1 focus:ring-violet-500 transition-all placeholder:[var(--text-muted)] resize-none" 
+              placeholder="Let's build something scalable..." 
+              required
+            />
           </div>
-          <Button variant="primary" className="w-full mt-2 h-12 text-base font-semibold tracking-wide">
-            Transmit Message
+          
+          <Button 
+            variant="primary" 
+            className={`w-full mt-2 h-12 text-base font-semibold tracking-wide ${status === 'success' ? 'bg-green-600 hover:bg-green-700' : ''}`}
+            disabled={status === "submitting" || status === "success"}
+          >
+            {status === "submitting" ? (
+              <span className="flex items-center gap-2">
+                <Loader2 className="w-4 h-4 animate-spin" /> Transmitting...
+              </span>
+            ) : status === "success" ? (
+              <span className="flex items-center gap-2">
+                <Check className="w-4 h-4" /> Transmission Complete
+              </span>
+            ) : (
+              "Transmit Message"
+            )}
           </Button>
+          
+          {status === "error" && (
+            <div className="text-red-400 text-xs text-center flex items-center justify-center gap-1.5 mt-2">
+              <AlertCircle className="w-3 h-3" /> {message}
+            </div>
+          )}
+          
+          <p className="text-center text-[10px] text-[var(--text-muted)] mt-4 opacity-60">
+            Directly reaches my inbox. No spam. Just meaningful conversations.
+          </p>
         </form>
       </RevealOnScroll>
     </section>
@@ -1341,7 +1418,7 @@ const App = () => {
         <div className="fixed top-0 left-0 h-0.5 bg-gradient-to-r from-violet-600 to-cyan-500 z-50 transition-all duration-100 ease-out" style={{ width: `${scrollProgress * 100}%` }} />
         
         {/* Custom Cursor */}
-        <div ref={cursorRef} className="fixed w-4 h-4 border border-[var(--text-main)] rounded-full pointer-events-none z-[9999] hidden md:block" />
+        <div ref={cursorRef} className="fixed w-4 h-4 border border-violet-500 bg-violet-500 rounded-full pointer-events-none z-[9999] hidden md:block" />
         <div ref={trailerRef} className="fixed w-8 h-8 border border-violet-500 rounded-full pointer-events-none z-[9998] opacity-30 hidden md:block transition-opacity duration-300" />
 
         {/* Nav */}
