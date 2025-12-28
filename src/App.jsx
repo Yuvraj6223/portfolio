@@ -160,7 +160,7 @@ const PROJECTS_DATA = [
     gradient: "from-purple-600 to-indigo-600",
     link: "#",
     status: "Development",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000" // Data Analytics/Dashboard
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1000"
   },
   {
     id: "02",
@@ -176,7 +176,7 @@ const PROJECTS_DATA = [
     gradient: "from-blue-600 to-cyan-600",
     link: "https://tattvacampus.ai",
     status: "Deployed",
-    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=1000" // Education/Tech
+    image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=1000"
   },
   {
     id: "03",
@@ -192,7 +192,7 @@ const PROJECTS_DATA = [
     gradient: "from-orange-600 to-red-600",
     link: "#",
     status: "Prototype",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000" // Circuit/Hardware
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1000"
   },
   {
     id: "04",
@@ -208,7 +208,7 @@ const PROJECTS_DATA = [
     gradient: "from-pink-600 to-rose-600",
     link: "#",
     status: "Deployed",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1000" // Data/AI Network
+    image: "https://images.unsplash.com/photo-1664575602276-acd073f104c1?auto=format&fit=crop&q=80&w=1000"
   },
   {
     id: "05",
@@ -224,7 +224,7 @@ const PROJECTS_DATA = [
     gradient: "from-cyan-500 to-blue-500",
     link: "#",
     status: "Deployed",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=1000" // React Code/Modern UI
+    image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&q=80&w=1000"
   }
 ];
 
@@ -942,7 +942,7 @@ const Hero = () => {
           <div className="relative w-32 h-32 md:w-40 md:h-40 rounded-full bg-[#050505] border-2 border-white/10 flex items-center justify-center overflow-hidden">
              {/* Replace this src with your actual profile photo URL */}
              <img 
-               src="src\assets\pimage_webp.webp" 
+               src="/pimage_webp.webp" 
                alt="Profile"
                className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
              />
@@ -1461,7 +1461,7 @@ const App = () => {
              <span>•</span>
              <span>Region: US-EAST</span>
           </div>
-          <p>ENGINEERED WITH REACT & TAILWIND // © 2025</p>
+          <p>ENGINEERED WITH REACT & TAILWIND // © 2024</p>
         </footer>
 
         <CommandPalette isOpen={isCmdKOpen} onClose={() => setIsCmdKOpen(false)} />
