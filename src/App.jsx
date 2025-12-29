@@ -1461,7 +1461,7 @@ const App = () => {
              <span>•</span>
              <span>Region: US-EAST</span>
           </div>
-          <p>ENGINEERED WITH REACT & TAILWIND // © 2024</p>
+          <p>ENGINEERED WITH REACT & TAILWIND // © 2025</p>
         </footer>
 
         <CommandPalette isOpen={isCmdKOpen} onClose={() => setIsCmdKOpen(false)} />
