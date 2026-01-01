@@ -1,0 +1,17 @@
+<!-- 
+  Please replace this with your actual resume PDF.
+  Save your resume as: public/Yuvraj_VA_Resume.pdf
+  
+  This is a placeholder text file to remind you to add your resume.
+-->
+
+PLACEHOLDER: Add your resume PDF here.
+
+To add your resume:
+1. Export your resume as PDF
+2. Name it: Yuvraj_VA_Resume.pdf  
+3. Place it in the /public folder
+4. The download button will automatically work
+
+If you want a different filename, update the resumeUrl in:
+src/data/portfolioData.js
