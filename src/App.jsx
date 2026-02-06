@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Github, Linkedin, Code } from "lucide-react";
 
 // Hooks
@@ -29,8 +29,7 @@ const App = () => {
   const [isCmdKOpen, setIsCmdKOpen] = useState(false);
   const { isDarkMode, toggleTheme } = useThemeManager();
 
-  const cursorRef = useRef(null);
-  const trailerRef = useRef(null);
+
 
   // ============================================
   // SEO Meta Tags
@@ -77,34 +76,7 @@ const App = () => {
 
   }, []);
 
-  // ============================================
-  // Custom Cursor (Desktop Only)
-  // ============================================
-  useEffect(() => {
-    // Skip on touch devices
-    if (window.matchMedia('(hover: none)').matches) return;
 
-    const cursor = cursorRef.current;
-    const trailer = trailerRef.current;
-
-    const moveCursor = (e) => {
-      const x = e.clientX;
-      const y = e.clientY;
-
-      if (cursor) {
-        cursor.style.transform = `translate3d(${x - 4}px, ${y - 4}px, 0)`;
-      }
-      if (trailer) {
-        trailer.animate(
-          { transform: `translate3d(${x - 16}px, ${y - 16}px, 0)` },
-          { duration: 500, fill: "forwards" }
-        );
-      }
-    };
-
-    window.addEventListener("mousemove", moveCursor, { passive: true });
-    return () => window.removeEventListener("mousemove", moveCursor);
-  }, []);
 
   // ============================================
   // Keyboard Shortcuts
@@ -151,9 +123,7 @@ const App = () => {
         color-scheme: ${isDarkMode ? 'dark' : 'light'}; 
       }
       
-      @media (hover: hover) {
-        * { cursor: none !important; }
-      }
+
       
       body { 
         background-color: var(--bg-main); 
@@ -249,17 +219,7 @@ const App = () => {
           aria-label="Page scroll progress"
         />
 
-        {/* Custom Cursor (Desktop Only) */}
-        <div
-          ref={cursorRef}
-          className="fixed w-2 h-2 bg-violet-500 rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-difference"
-          aria-hidden="true"
-        />
-        <div
-          ref={trailerRef}
-          className="fixed w-8 h-8 border border-violet-500/50 rounded-full pointer-events-none z-[9998] hidden md:block"
-          aria-hidden="true"
-        />
+
 
         {/* Navigation */}
         <Navbar onOpenCommandPalette={() => setIsCmdKOpen(true)} />
