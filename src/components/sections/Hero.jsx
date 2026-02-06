@@ -23,7 +23,7 @@ const Hero = () => {
         // Create a download link for the resume
         const link = document.createElement('a');
         link.href = BIO_DATA.resumeUrl;
-        link.download = 'Yuvraj_VA_Resume.pdf';
+        link.download = 'YuvrajVA_Resume.pdf';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);

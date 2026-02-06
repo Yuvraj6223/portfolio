@@ -10,7 +10,7 @@ export const BIO_DATA = {
     summary: "Focused on API-driven backend systems, AI integrations, and production-ready engineering.",
     keyStrengths: ["System Design", "Distributed Systems", "GenAI Integration", "Backend Architecture"],
     education: "B.E in Computer Science (CGPA: 8.5) from HKBK College of Engineering.",
-    resumeUrl: "/Yuvraj_VA_Resume.pdf", // Add your resume PDF to public folder
+    resumeUrl: "/YuvrajVA_Resume.pdf", // Add your resume PDF to public folder
     social: {
         github: "https://github.com/Yuvraj6223",
         linkedin: "https://www.linkedin.com/in/yuvrajva6223",

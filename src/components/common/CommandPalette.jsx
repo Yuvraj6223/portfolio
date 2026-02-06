@@ -44,7 +44,7 @@ const CommandPalette = ({ isOpen, onClose }) => {
             action: () => {
                 const link = document.createElement('a');
                 link.href = BIO_DATA.resumeUrl;
-                link.download = 'Yuvraj_VA_Resume.pdf';
+                link.download = 'YuvrajVA_Resume.pdf';
                 link.click();
             }
         },
